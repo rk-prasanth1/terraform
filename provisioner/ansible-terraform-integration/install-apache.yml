@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  remote_user: ubuntu
+  tasks:
+    - name: install apache
+      get: 
+        name: apache
+        state: latest
+    - name: start apache
+      service:
+        name: apache
+        state: started
+    - name: copy custom index.html file
+      copy: 
+        src: ./index.html
+        dest: /var/www/html/index.html
